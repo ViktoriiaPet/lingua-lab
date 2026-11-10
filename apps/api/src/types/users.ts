@@ -13,3 +13,12 @@ export type CreateUserInput = {
   roles: UserRole[];
   password: string;
 };
+
+export type requestGetUserType = {
+  id: string;
+};
+export type updateUserInput = {
+  email: string;
+  name?: string;
+  roles?: UserRole[];
+};
