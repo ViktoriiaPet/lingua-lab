@@ -1,3 +1,5 @@
+
+### USERS
 GET http://localhost:3000/users
 
 ###
@@ -9,4 +11,122 @@ Content-Type: application/json
   "name": "Test User",
   "roles": ["student"],
   "password": "bla-bla-bla"
+}
+
+###
+GET http://localhost:3000/users/21
+
+###
+PATCH http://localhost:3000/users/21
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "name": "Test User",
+  "roles": ["student"]
+}
+
+###
+DELETE http://localhost:3000/users/21
+
+### LESSONS
+
+GET http://localhost:3000/lessons
+
+###
+POST http://localhost:3000/lessons
+Content-Type: application/json
+
+{
+  "name": "test@example.com",
+  "description": "Test User",
+  "list": ["student"],
+}
+###
+GET http://localhost:3000/lessons/21
+
+###
+PATCH http://localhost:3000/lessons/21
+Content-Type: application/json
+
+{
+  "name": "test@example.com",
+  "description": "Test User",
+  "list": ["student"]
+}
+###
+DELETE http://localhost:3000/lessons/21
+
+### EXERCISE
+GET http://localhost:3000/exercises
+###
+GET http://localhost:3000/exercises/21
+###
+DELETE http://localhost:3000/exercises/21
+###
+POST http://localhost:3000/exercises
+Content-Type: application/json
+
+{
+  "name": "test@example.com",
+  "text": "Test User",
+  "type": "nothing",
+  "variantes":  ["student"]
+}
+
+###
+PATCH http://localhost:3000/exercises/21
+Content-Type: application/json
+
+{
+  "name": "test@example.com",
+  "text": "Test User",
+  "type": "nothing",
+  "variantes":  ["student"]
+}
+### RELATIONSHIP
+GET http://localhost:3000/relationships
+###
+GET http://localhost:3000/relationships/21
+###
+DELETE http://localhost:3000/relationships/21
+###
+POST  http://localhost:3000/relationships
+Content-Type: application/json
+
+{
+  "teacherId": "string",
+  "studentId": "string"
+}
+
+###
+PATCH  http://localhost:3000/relationships/21
+Content-Type: application/json
+
+{
+  "status": "active"
+}
+### ASSIGNMENT
+GET http://localhost:3000/assignments
+###
+GET http://localhost:3000/assignments/21
+###
+DELETE  http://localhost:3000/assignments/21
+###
+POST  http://localhost:3000/assignments
+Content-Type: application/json
+
+{
+  "teacherId": "string",
+  "studentId": "string",
+  "exerciseId": "string"
+}
+
+###
+PATCH  http://localhost:3000/assignments/21
+Content-Type: application/json
+
+{
+  "status": "completed"
+
 }
