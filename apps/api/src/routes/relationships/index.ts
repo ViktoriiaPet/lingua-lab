@@ -36,6 +36,7 @@ const relationship: FastifyPluginAsync = async (fastify, opts): Promise<void> =>
       schema: {
         body: {
           type: "object",
+          minProperties: 1,
           properties: {
             status: { type: "string", enum: ["pending", "active", "ended"] },
           },
