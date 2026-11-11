@@ -37,6 +37,7 @@ const assignment: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       schema: {
         body: {
           type: "object",
+          minProperties: 1,
           properties: {
             status: { type: "string", enum: ["assigned", "completed", "cancelled", "hidden"] },
           },

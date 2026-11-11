@@ -40,6 +40,7 @@ const lessons: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       schema: {
         body: {
           type: "object",
+          minProperties: 1,
           properties: {
             name: { type: "string" },
             description: { type: "string" },
