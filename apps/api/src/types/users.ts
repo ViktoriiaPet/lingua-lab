@@ -5,6 +5,7 @@ export type User = {
   email: string;
   name: string;
   roles: UserRole[];
+  password: string;
 };
 
 export type CreateUserInput = {
@@ -22,3 +23,4 @@ export type updateUserInput = {
   name?: string;
   roles?: UserRole[];
 };
+export type UpdateUserInput = Partial<Pick<User, "name" | "email" | "roles">>;

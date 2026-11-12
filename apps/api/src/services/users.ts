@@ -54,14 +54,3 @@ export async function updateUser(id: string, data: UpdateUserInput) {
 export async function deleteUser(id: string) {
   await db.delete(usersTable).where(eq(usersTable.id, id)).returning({ id: usersTable.id });
 }
-
-export async function main() {
-  await db.update(usersTable).set({
-    roles: ["student"],
-  });
-  // .where(eq(usersTable.email, users.email));
-  console.log("User info updated!");
-  // await db.delete(usersTable).where(eq(usersTable.email, users.email));
-  console.log("User deleted!");
-}
-main();
