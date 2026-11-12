@@ -3,6 +3,7 @@ export type CreateExercisesInput = {
   text: string;
   type: string;
   variantes: unknown[];
+  creatorId: string;
 };
 export type requestGetExercisesType = {
   id: string;
