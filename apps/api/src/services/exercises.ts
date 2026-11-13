@@ -19,6 +19,7 @@ export async function registerExercises(exercisesData: CreateExercisesInput) {
 export async function getAllExercise() {
   const exercise = await db.query.exerciseTable.findMany({
     columns: {
+      id: true,
       name: true,
       text: true,
       type: true,
@@ -40,7 +41,7 @@ export async function getExerciseById(id: string) {
       creatorId: true,
     },
   });
-  return exercise;
+  return exercise ?? null;
 }
 
 export async function updateExercise(id: string, data: updateExercisesInput) {
