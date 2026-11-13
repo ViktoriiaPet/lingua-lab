@@ -2,6 +2,13 @@ import { FastifyPluginAsync } from "fastify";
 import { CreateAssignmentInput } from "../../types/assignment";
 import { requestGetAssignmentType } from "../../types/assignment";
 import { updateAssignmentInput } from "../../types/assignment";
+import {
+  registerAssignment,
+  getAllAssignment,
+  getAssignmentById,
+  updateAssignment,
+  deleteAssignment,
+} from "../../services/assignment";
 
 const schema = {
   body: {
@@ -17,18 +24,20 @@ const schema = {
 
 const assignment: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.get("/", async function (request, reply) {
-    return { assignments: [] };
+    const result = await getAllAssignment();
+    return { result };
   });
 
   fastify.post<{ Body: CreateAssignmentInput }>("/", { schema }, async function (request, reply) {
     const data = request.body;
-    const { teacherId, studentId, exerciseId } = data;
-    return { teacherId, studentId, exerciseId };
+    const result = await registerAssignment(data);
+    return { result };
   });
 
   fastify.get<{ Params: requestGetAssignmentType }>("/:id", async function (request, reply) {
     const { id } = request.params;
-    return { assignmentId: [id] };
+    const result = await getAssignmentById(id);
+    return result ?? reply.code(404);
   });
 
   fastify.patch<{ Params: requestGetAssignmentType; Body: updateAssignmentInput }>(
@@ -47,13 +56,15 @@ const assignment: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     async function (request, reply) {
       const { id } = request.params;
       const updateData = request.body;
-      return { id, updateData };
+      const result = await updateAssignment(id, updateData);
+      return { result };
     },
   );
 
   fastify.delete<{ Params: requestGetAssignmentType }>("/:id", async function (request, reply) {
     const { id } = request.params;
-    return { assignmentId: [id] };
+    const result = await deleteAssignment(id);
+    return { result };
   });
 };
 

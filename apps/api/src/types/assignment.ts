@@ -2,6 +2,7 @@ export type CreateAssignmentInput = {
   teacherId: string;
   studentId: string;
   exerciseId: string;
+  assignedStatus: "assigned" | "completed" | "cancelled" | "hidden";
 };
 
 export type requestGetAssignmentType = {
@@ -9,5 +10,5 @@ export type requestGetAssignmentType = {
 };
 
 export type updateAssignmentInput = {
-  status?: "assigned" | "completed" | "cancelled" | "hidden";
+  assignedStatus: "assigned" | "completed" | "cancelled" | "hidden";
 };
