@@ -1,6 +1,7 @@
 export type CreateRelationshipInput = {
   teacherId: string;
   studentId: string;
+  relationshipStatus: "pending" | "active" | "ended";
 };
 
 export type requestGetRelationshipType = {
@@ -8,5 +9,5 @@ export type requestGetRelationshipType = {
 };
 
 export type updateRelationshipInput = {
-  status?: "pending" | "active" | "ended";
+  relationshipStatus: "pending" | "active" | "ended";
 };
