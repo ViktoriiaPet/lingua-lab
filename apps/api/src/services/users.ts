@@ -39,7 +39,7 @@ export async function getUserById(id: string) {
       roles: true,
     },
   });
-  return user;
+  return user ?? null;
 }
 
 export async function updateUser(id: string, data: UpdateUserInput) {

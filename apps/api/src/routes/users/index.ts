@@ -38,7 +38,8 @@ const users: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.get<{ Params: requestGetUserType }>("/:id", async function (request, reply) {
     const { id } = request.params;
     const result = await getUserById(id);
-    return result;
+
+    return result ?? reply.code(404);
   });
 
   fastify.patch<{ Params: requestGetUserType; Body: updateUserInput }>(
