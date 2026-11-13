@@ -39,7 +39,7 @@ export async function getLessonById(id: string) {
       creatorId: true,
     },
   });
-  return lesson;
+  return lesson ?? null;
 }
 
 export async function updateLesson(id: string, data: updateLessonInput) {

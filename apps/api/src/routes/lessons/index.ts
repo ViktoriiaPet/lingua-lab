@@ -2,6 +2,13 @@ import { FastifyPluginAsync } from "fastify";
 import { CreateLessonInput } from "../../types/lessons";
 import { requestGetLessonType } from "../../types/lessons";
 import { updateLessonInput } from "../../types/lessons";
+import {
+  registerLesson,
+  getAllLessons,
+  getLessonById,
+  updateLesson,
+  deleteLesson,
+} from "../../services/lessons";
 
 const schema = {
   body: {
@@ -20,18 +27,20 @@ const schema = {
 
 const lessons: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.get("/", async function (request, reply) {
-    return { lessons: [] };
+    const result = await getAllLessons();
+    return { result };
   });
 
   fastify.post<{ Body: CreateLessonInput }>("/", { schema }, async function (request, reply) {
     const data = request.body;
-    const { name, description, list } = data;
-    return { name, description, list };
+    const result = await registerLesson(data);
+    return { result };
   });
 
   fastify.get<{ Params: requestGetLessonType }>("/:id", async function (request, reply) {
     const { id } = request.params;
-    return { lessonId: [id] };
+    const result = await getLessonById(id);
+    return result ?? reply.code(404);
   });
 
   fastify.patch<{ Params: requestGetLessonType; Body: updateLessonInput }>(
@@ -55,13 +64,15 @@ const lessons: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
     async function (request, reply) {
       const { id } = request.params;
       const updateData = request.body;
-      return { id, updateData };
+      const result = await updateLesson(id, updateData);
+      return { result };
     },
   );
 
   fastify.delete<{ Params: requestGetLessonType }>("/:id", async function (request, reply) {
     const { id } = request.params;
-    return { lessonId: [id] };
+    const result = await deleteLesson(id);
+    return { result };
   });
 };
 
